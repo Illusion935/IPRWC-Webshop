@@ -28,3 +28,7 @@ Frontend/.angular/
 # ===========================
 .DS_Store
 Thumbs.db
+
+# Overige bestanden in de root
+cmd output
+*.pdf
