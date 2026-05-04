@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: clothes
+  datasource:
+    url: jdbc:postgresql://localhost:5432/webshop
+    username: postgres
+    password: JOUW_DATABASE_WACHTWOORD
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  # Genereer een secret met PowerShell:
+  # [Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Max 256 }) -as [byte[]])
+  secret: JOUW_JWT_SECRET_BASE64
+  expiration: 86400000
+
+admin:
+  email: admin@webshop.nl
+  password: JOUW_ADMIN_WACHTWOORD

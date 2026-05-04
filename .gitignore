@@ -1,0 +1,30 @@
+# ===========================
+# Spring Boot / Maven (Backend)
+# ===========================
+Backend/target/
+Backend/.mvn/wrapper/maven-wrapper.jar
+Backend/*.log
+
+# Gevoelige configuratie - NOOIT op GitHub zetten
+Backend/src/main/resources/application.yaml
+
+# ===========================
+# Angular / Node (Frontend)
+# ===========================
+Frontend/node_modules/
+Frontend/dist/
+Frontend/.angular/
+
+# ===========================
+# IDE bestanden
+# ===========================
+.idea/
+*.iml
+.vscode/
+*.class
+
+# ===========================
+# OS bestanden
+# ===========================
+.DS_Store
+Thumbs.db
