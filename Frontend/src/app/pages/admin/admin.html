@@ -1,0 +1,120 @@
+<div class="admin-page">
+  <header class="admin-header">
+    <h1>Admin Portaal</h1>
+    <div class="header-actions">
+      <button class="btn-primary" (click)="openAddForm()">+ Nieuw product</button>
+      <button class="btn-secondary" (click)="authService.logout()">Uitloggen</button>
+    </div>
+  </header>
+
+  @if (successMsg()) {
+    <div class="alert alert-success">{{ successMsg() }}</div>
+  }
+  @if (error()) {
+    <div class="alert alert-error">{{ error() }}</div>
+  }
+
+  <!-- Formulier: nieuw of bewerken -->
+  @if (showForm()) {
+    <div class="form-panel">
+      <h2>{{ editingProduct() ? 'Product bewerken' : 'Nieuw product' }}</h2>
+      <form (ngSubmit)="saveProduct()">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Naam</label>
+            <input type="text" [(ngModel)]="formData.name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label>Prijs (€)</label>
+            <input type="number" [(ngModel)]="formData.price" name="price" step="0.01" min="0" required />
+          </div>
+          <div class="form-group">
+            <label>Voorraad</label>
+            <input type="number" [(ngModel)]="formData.stock" name="stock" min="0" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Beschrijving</label>
+          <textarea [(ngModel)]="formData.description" name="description" rows="3"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Opslaan</button>
+          <button type="button" class="btn-secondary" (click)="cancelForm()">Annuleren</button>
+        </div>
+      </form>
+    </div>
+  }
+
+  <!-- Productenlijst -->
+  @if (loading()) {
+    <p class="loading">Laden...</p>
+  } @else {
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Naam</th>
+          <th>Prijs</th>
+          <th>Voorraad</th>
+          <th>Afb.</th>
+          <th>Acties</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (product of products(); track product.id) {
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>€ {{ product.price | number:'1.2-2' }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.images.length }}</td>
+            <td class="actions">
+              <button class="btn-small btn-edit" (click)="openEditForm(product)">Bewerken</button>
+              <button class="btn-small btn-images" (click)="toggleImagePanel(product)">Afbeeldingen</button>
+              <button class="btn-small btn-delete" (click)="deleteProduct(product)">Verwijderen</button>
+            </td>
+          </tr>
+
+          <!-- Afbeeldingen paneel onder de rij -->
+          @if (selectedProductForImage()?.id === product.id) {
+            <tr class="image-row">
+              <td colspan="6">
+                <div class="image-panel">
+                  <h4>Afbeeldingen van "{{ product.name }}"</h4>
+
+                  @if (product.images.length === 0) {
+                    <p class="no-images">Nog geen afbeeldingen.</p>
+                  } @else {
+                    <div class="image-list">
+                      @for (img of product.images; track img.id) {
+                        <div class="image-item">
+                          <img [src]="img.imageUrl" [alt]="img.productName" />
+                          <span class="image-url">{{ img.imageUrl }}</span>
+                          <button class="btn-small btn-delete" (click)="deleteImage(product, img.id)">✕</button>
+                        </div>
+                      }
+                    </div>
+                  }
+
+                  <div class="add-image-form">
+                    <input
+                      type="url"
+                      [(ngModel)]="newImageUrl"
+                      placeholder="https://... afbeelding URL"
+                      name="newImageUrl"
+                    />
+                    <button class="btn-small btn-primary" (click)="addImage(product)">Toevoegen</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+
+    @if (products().length === 0) {
+      <p class="empty">Geen producten gevonden. Voeg er een toe!</p>
+    }
+  }
+</div>

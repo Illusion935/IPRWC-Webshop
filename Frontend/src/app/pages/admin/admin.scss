@@ -1,0 +1,198 @@
+.admin-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h1 { margin: 0; font-size: 1.75rem; }
+  .header-actions { display: flex; gap: 0.75rem; }
+}
+
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+
+  &.alert-success { background: #d1fae5; color: #065f46; }
+  &.alert-error   { background: #fee2e2; color: #b91c1c; }
+}
+
+// Formulier paneel
+.form-panel {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  h2 { margin: 0 0 1rem; font-size: 1.1rem; }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  label { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.25rem; color: #374151; }
+
+  input, textarea {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-family: inherit;
+
+    &:focus { outline: none; border-color: #6b7280; }
+  }
+
+  textarea { resize: vertical; }
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+// Tabel
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+
+  th {
+    background: #1f2937;
+    color: white;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+  }
+
+  tbody tr:hover { background: #f9fafb; }
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+// Afbeeldingen paneel
+.image-row td { padding: 0; background: #f3f4f6; }
+
+.image-panel {
+  padding: 1rem 1.5rem;
+
+  h4 { margin: 0 0 0.75rem; font-size: 0.95rem; }
+}
+
+.image-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.image-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+
+  img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .image-url {
+    font-size: 0.8rem;
+    color: #6b7280;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.add-image-form {
+  display: flex;
+  gap: 0.5rem;
+
+  input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.9rem;
+
+    &:focus { outline: none; border-color: #6b7280; }
+  }
+}
+
+.no-images { font-size: 0.85rem; color: #9ca3af; margin-bottom: 0.75rem; }
+.empty, .loading { text-align: center; color: #6b7280; padding: 2rem; }
+
+// Knoppen
+.btn-primary {
+  padding: 0.5rem 1.25rem;
+  background: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  &:hover { background: #374151; }
+}
+
+.btn-secondary {
+  padding: 0.5rem 1.25rem;
+  background: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  &:hover { background: #f3f4f6; }
+}
+
+.btn-small {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  &.btn-edit   { background: #dbeafe; color: #1d4ed8; &:hover { background: #bfdbfe; } }
+  &.btn-images { background: #d1fae5; color: #065f46; &:hover { background: #a7f3d0; } }
+  &.btn-delete { background: #fee2e2; color: #b91c1c; &:hover { background: #fecaca; } }
+  &.btn-primary { background: #1f2937; color: white; font-size: 0.85rem; &:hover { background: #374151; } }
+}
