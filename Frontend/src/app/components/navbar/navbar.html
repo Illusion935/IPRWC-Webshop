@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <a class="navbar-brand" routerLink="/">👕 Webshop</a>
+
+  <div class="navbar-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Producten</a>
+
+    @if (authService.isAdmin()) {
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    }
+
+    @if (authService.isLoggedIn()) {
+      <button class="btn-logout" (click)="authService.logout()">Uitloggen</button>
+    } @else {
+      <a routerLink="/login" routerLinkActive="active">Inloggen</a>
+    }
+  </div>
+</nav>
