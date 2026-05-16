@@ -1,6 +1,6 @@
 <div class="login-container">
   <div class="login-card">
-    <h2>Inloggen</h2>
+    <h2>Registreren</h2>
 
     @if (error()) {
       <div class="error-msg">{{ error() }}</div>
@@ -32,10 +32,16 @@
       </div>
 
       <button type="submit" [disabled]="loading()">
-        {{ loading() ? 'Bezig...' : 'Inloggen' }}
+        {{ loading() ? 'Bezig...' : 'Registreren' }}
       </button>
     </form>
 
-    <p class="switch-link">Nog geen account? <a routerLink="/register">Registreren</a></p>
+    <p class="switch-link">Al een account? <a routerLink="/login">Inloggen</a></p>
   </div>
 </div>
+
+@if (success()) {
+  <div class="toast-success">
+    ✓ Registratie geslaagd, welkom!
+  </div>
+}

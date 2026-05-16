@@ -1,18 +1,23 @@
 <nav class="navbar">
-  <a class="navbar-brand" routerLink="/">👕 Webshop</a>
+  <a class="navbar-brand" routerLink="/" (click)="closeMenu()">👕 Webshop</a>
 
-  <div class="navbar-links">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Producten</a>
+  <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="navbar-links" [class.open]="menuOpen()">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Producten</a>
 
     @if (authService.isAdmin()) {
-      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+      <a routerLink="/admin" routerLinkActive="active" (click)="closeMenu()">Admin</a>
     }
 
     @if (authService.isLoggedIn()) {
-      <a routerLink="/cart" routerLinkActive="active">🛒 Winkelmandje</a>
-      <button class="btn-logout" (click)="authService.logout()">Uitloggen</button>
+      <a routerLink="/cart" routerLinkActive="active" (click)="closeMenu()">🛒 Winkelmandje</a>
+      <button class="btn-logout" (click)="authService.logout(); closeMenu()">Uitloggen</button>
     } @else {
-      <a routerLink="/login" routerLinkActive="active">Inloggen</a>
+      <a routerLink="/login" routerLinkActive="active" (click)="closeMenu()">Inloggen</a>
+      <a routerLink="/register" routerLinkActive="active" (click)="closeMenu()">Registreren</a>
     }
   </div>
 </nav>

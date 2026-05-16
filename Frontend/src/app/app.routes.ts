@@ -7,6 +7,10 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   {
+    path: 'register',
+    loadComponent: () => import('./pages/register/register').then(m => m.RegisterComponent)
+  },
+  {
     path: 'cart',
     canActivate: [authGuard],
     loadComponent: () => import('./pages/cart/cart').then(m => m.CartComponent)
