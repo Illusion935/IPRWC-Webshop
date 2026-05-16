@@ -9,6 +9,7 @@
     }
 
     @if (authService.isLoggedIn()) {
+      <a routerLink="/cart" routerLinkActive="active">🛒 Winkelmandje</a>
       <button class="btn-logout" (click)="authService.logout()">Uitloggen</button>
     } @else {
       <a routerLink="/login" routerLinkActive="active">Inloggen</a>

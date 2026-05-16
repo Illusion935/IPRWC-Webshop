@@ -4,6 +4,7 @@ import com.webshop.clothes.dto.ProductImageRequest;
 import com.webshop.clothes.dto.ProductRequest;
 import com.webshop.clothes.model.Product;
 import com.webshop.clothes.model.ProductImage;
+import com.webshop.clothes.repository.OrderItemRepository;
 import com.webshop.clothes.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final OrderItemRepository orderItemRepository;
 
     public List<Product> getAll() {
         return productRepository.findAll();
@@ -47,6 +49,9 @@ public class ProductService {
     }
 
     public void delete(Long id) {
+        // Verwijder eerst alle order items die naar dit product verwijzen
+        // zodat de FK constraint niet wordt geschonden
+        orderItemRepository.deleteByProductId(id);
         productRepository.deleteById(id);
     }
 

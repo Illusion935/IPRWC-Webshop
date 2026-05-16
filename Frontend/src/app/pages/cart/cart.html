@@ -1,0 +1,46 @@
+<div class="cart-page">
+  <h1>Winkelmandje</h1>
+
+  @if (loading()) {
+    <p>Laden...</p>
+  }
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  @if (successMsg()) {
+    <p class="success">{{ successMsg() }}</p>
+  }
+
+  @if (!loading() && !successMsg()) {
+    @if (!cart() || cart()!.items.length === 0) {
+      <p class="empty">Je winkelmandje is leeg. <a routerLink="/">Bekijk producten</a></p>
+    } @else {
+      <div class="cart-items">
+        @for (item of cart()!.items; track item.id) {
+          <div class="cart-item">
+            @if (item.product.images.length > 0) {
+              <img [src]="item.product.images[0].imageUrl" [alt]="item.product.name" />
+            }
+            <div class="item-info">
+              <h3>{{ item.product.name }}</h3>
+              <p>€ {{ item.product.price | number:'1.2-2' }} per stuk</p>
+              <p>Aantal: {{ item.quantity }}</p>
+              <p class="subtotal">Subtotaal: € {{ (item.product.price * item.quantity) | number:'1.2-2' }}</p>
+            </div>
+            <button class="btn-remove" (click)="removeItem(item.id)">Verwijderen</button>
+          </div>
+        }
+      </div>
+
+      <div class="cart-footer">
+        <span class="total">Totaal: € {{ getTotal() | number:'1.2-2' }}</span>
+        <div class="cart-actions">
+          <button class="btn-clear" (click)="clearCart()">Mandje leegmaken</button>
+          <button class="btn-checkout" (click)="checkout()">Afrekenen</button>
+        </div>
+      </div>
+    }
+  }
+</div>

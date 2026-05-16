@@ -1,11 +1,16 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home';
 import { LoginComponent } from './pages/login/login';
-import { adminGuard } from './guards/auth.guard';
+import { adminGuard, authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  {
+    path: 'cart',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pages/cart/cart').then(m => m.CartComponent)
+  },
   {
     path: 'admin',
     canActivate: [adminGuard],

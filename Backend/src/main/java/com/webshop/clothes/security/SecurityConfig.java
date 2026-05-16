@@ -43,6 +43,11 @@ public class SecurityConfig {
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
+            // 401 bij niet-ingelogd, 403 bij onvoldoende rechten
+            .exceptionHandling(ex -> ex
+                .authenticationEntryPoint((request, response, authException) ->
+                    response.sendError(401, "Niet geautoriseerd: log eerst in")))
+
             // Toegangsregels per endpoint
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
